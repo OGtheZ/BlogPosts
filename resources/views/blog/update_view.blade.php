@@ -1,0 +1,31 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Update your blog') . ' ' . $post->id }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <x-form action="{{ route('blog.edit', ['post' => $post]) }}" method="post">
+                    @csrf
+                    <div class="mx-2 my-2 max-w-2xl">
+                        <x-input-label for="title" :value="__('Title')" />
+                        <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" value="{{ $post->title }}"/>
+                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                    </div>
+                    <div class="mx-2 my-2">
+                        <label for="body" class="text-gray-500">{{ __('Body') }}</label>
+                        <x-textarea id="body" class="block mt-1 w-full border-gray-300 rounded-md" rows="20" style="resize:none" name="body" :value="old('body')">
+                            {{ $post->body }}
+                        </x-textarea>
+                        <x-input-error :messages="$errors->get('body')" class="mt-2" />
+                    </div>
+                    <x-primary-button class="text-white ml-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                      type="submit">Submit</x-primary-button>
+                </x-form>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
