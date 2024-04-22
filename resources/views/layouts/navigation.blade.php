@@ -10,9 +10,9 @@
                         {{ __('Your blogs') }}
                     </x-nav-link>
                     @endauth
-                    <x-nav-link :href="route('blog.view_new')" :active="request()->routeIs('blog.view_new')">
+                    <x-nav-link :href="route('blog.view_new')" :active="request()->routeIs(['blog.view_new'])">
                         {{ __('Newest blogs') }}
-                    </x-nav-link><x-nav-link :href="route('blog.own_list')" :active="request()->routeIs('blog.own_list')">
+                    </x-nav-link><x-nav-link :href="route('categories.list')" :active="request()->routeIs(['categories.list', 'categories.blogs'])">
                         {{ __('Categories') }}
                     </x-nav-link>
 

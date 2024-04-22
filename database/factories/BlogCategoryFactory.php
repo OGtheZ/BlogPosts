@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BlogPost>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BlogCategory>
  */
-class BlogPostFactory extends Factory
+class BlogCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,7 @@ class BlogPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence,
-            'body' => fake()->paragraph . ' ' . fake()->paragraph
+            'name' => fake()->word()
         ];
     }
 }

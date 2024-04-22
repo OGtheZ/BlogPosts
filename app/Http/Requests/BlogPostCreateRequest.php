@@ -23,7 +23,9 @@ class BlogPostCreateRequest extends FormRequest
     {
         return [
             'body' => ['required'],
-            'title' => ['required', 'unique:blog_posts', 'max:255']
+            'title' => ['required', 'unique:blog_posts', 'max:255'],
+            'categories' => ['required', 'array'],
+            'categories.*' => ['required', 'exists:blog_categories,id']
         ];
     }
 }

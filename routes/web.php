@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ProfileController;
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [BlogPostController::class, 'viewNewest'])->name('blog.view_new');
 Route::get('/blog/{post}/view', [BlogPostController::class, 'view'])->name('blog.view');
+Route::get('/categories', [BlogCategoryController::class, 'view'])->name('categories.list');
+Route::get('/categories/{category}/blogs', [BlogCategoryController::class, 'viewBlogs'])->name('categories.blogs');
 
 Route::middleware('auth')->group(function () {
     Route::get('/create-blog', [BlogPostController::class, 'create'])->name('blog.create');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BlogPostCreateRequest;
 use App\Http\Requests\BlogPostUpdateRequest;
+use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +14,7 @@ use Illuminate\View\View;
 class BlogPostController extends Controller
 {
     public function store(BlogPostCreateRequest $request): RedirectResponse {
-        $validated = $request->safe()->only(['body', 'title']);
+        $validated = $request->safe()->only(['body', 'title', 'categories']);
         $user = auth()->user();
 
         $blogPost = new BlogPost();
@@ -22,11 +23,14 @@ class BlogPostController extends Controller
         $blogPost->author_id = $user->id;
         $blogPost->save();
 
+        $blogPost->blogCategories()->attach($validated['categories']);
+
         return redirect()->route('blog.own_list');
     }
 
     public function create(): View {
-        return view('blog/create_view');
+        $categories = BlogCategory::all();
+        return view('blog/create_view', ['categories' => $categories]);
     }
 
     public function listOwn(): View {

@@ -10,6 +10,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <x-form action="{{ route('blog.store') }}" method="post">
                     @csrf
+                    <div class="category-box ml-2 mt-2">
+                        <x-input-label for="categories" :value="__('Category')" />
+                        <select class="mt-2 rounded border-gray-300" name="categories[]" id="categories" multiple="multiple">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="mx-2 my-2 max-w-2xl">
                         <x-input-label for="title" :value="__('Title')" />
                         <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')"/>
@@ -28,3 +36,13 @@
         </div>
     </div>
 </x-app-layout>
+@push('styles')
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/choices.min.css"
+    />
+@endpush
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js" defer></script>
+@endpush
