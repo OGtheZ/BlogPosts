@@ -10,7 +10,7 @@
         @if(request()->routeIs('blog.view_new'))
             <form class="mt-2" action="{{ route('blog.view_new') }}" method="get">
                 <label for="search">Search</label>
-                <input class="border-solid rounded border-gray-200" type="text" id="search" name="search">
+                <input value="{{ request()->get('search') ?? '' }}" class="border-solid rounded border-gray-200" type="text" id="search" name="search">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
                 <a class=" text-gray-400 font-bold ml-2 py-2 px-4 rounded border-solid border-2 border-gray-400" href="{{ route('blog.view_new') }}">Clear</a>
             </form>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,15 +22,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/', [BlogPostController::class, 'viewNewest'])->name('blog.view_new');
+Route::get('/blog/{post}/view', [BlogPostController::class, 'view'])->name('blog.view');
+
 Route::middleware('auth')->group(function () {
     Route::get('/create-blog', [BlogPostController::class, 'create'])->name('blog.create');
-    Route::post('/create-blog', [BlogPostController::class, 'store'])->name('blog.create');
+    Route::post('/create-blog', [BlogPostController::class, 'store'])->name('blog.store');
     Route::get('/your-blogs', [BlogPostController::class, 'listOwn'])->name('blog.own_list');
-    Route::get('/blog/{post}/view', [BlogPostController::class, 'view'])->name('blog.view');
     Route::get('/blog/{post}/delete', [BlogPostController::class, 'delete'])->name('blog.delete');
     Route::get('/blog/{post}/edit', [BlogPostController::class, 'updateView'])->name('blog.edit');
     Route::post('/blog/{post}/edit', [BlogPostController::class, 'update'])->name('blog.edit');
-    Route::get('/blog/new', [BlogPostController::class, 'viewNewest'])->name('blog.view_new');
+
+    Route::post('/blog/{post}/comment', [BlogCommentController::class, 'store'])->name('blog.comment');
+    Route::get('/comment/{blogComment}/delete', [BlogCommentController::class, 'delete'])->name('comment.delete');
 });
+
+
+
 
 require __DIR__.'/auth.php';

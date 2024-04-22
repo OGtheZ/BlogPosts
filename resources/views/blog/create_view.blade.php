@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <x-form action="{{ route('blog.create') }}" method="post">
+                <x-form action="{{ route('blog.store') }}" method="post">
                     @csrf
                     <div class="mx-2 my-2 max-w-2xl">
                         <x-input-label for="title" :value="__('Title')" />
