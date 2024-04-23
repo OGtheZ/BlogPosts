@@ -6,6 +6,7 @@
     1. requires PHP 8.1 or higher and composer installed globally on your system
     2. may require additional PHP extensions to be installed
 2. to build assets in the terminal run: npm run build
+    1. requires NPM installed
 3. Setup .env , database url
     1. the database type used in this project is Postgresql
     2. create a database and add the host, port, user, password and database name
