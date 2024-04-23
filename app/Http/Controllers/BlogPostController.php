@@ -35,7 +35,7 @@ class BlogPostController extends Controller
 
     public function listOwn(): View {
         $user = auth()->user();
-        $posts = BlogPost::where('author_id', $user->id)->get();
+        $posts = BlogPost::where('author_id', $user->id)->orderBy('created_at', 'desc')->get();
         return view('blog/list', ['posts' => $posts]);
     }
 
