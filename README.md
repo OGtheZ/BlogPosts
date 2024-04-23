@@ -33,7 +33,8 @@ The applications views and features are:
 7. Create blog view
 8. Edit blog view
 9. Profile edit view (provided by breeze, change password, name, email, delete account)
-10. Search bar in the Newest blogs view, to search by title or content
-11. Blogs and comments are deletable by the owner, blogs can also be edited
+10. Newest blogs by all users
+11. Search bar in the Newest blogs view, to search by title or content
+12. Blogs and comments are deletable by the owner, blogs can also be edited
     1. blogs can be edited and deleted from the Your blogs view
     2. comments can be deleted in the open blog post view
