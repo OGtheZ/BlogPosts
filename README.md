@@ -10,7 +10,8 @@
     1. the database type used in this project is Postgresql
     2. create a database and add the host, port, user, password and database name
     3. set SCOUT_DRIVER to database to make models searchable the database
-    4. additionally you can set up an email manager, to use email verification, password recovery provided by breeze, the functionality has not been removed
+    4. setup mailer data to use password reset functionality. for tests you can use mailtrap.io e.g.
+    5. email verification is not enabled in project by default
 4. run migrations with the command: php artisan migrate
 5. populate the database with the command: php artisan db:seed
     1. this will create:
@@ -24,13 +25,14 @@
 The applications views and features are:
 1. list of all blog posts (home route)
 2. Log in view for guests
-3. Categories list view, clickable category names to view posts from the chosen category
-4. Open blog post view, with comments and comment form for authenticated users
-5. Your blogs list
-6. Create blog view
-7. Edit blog view
-8. Profile edit view (provided by breeze)
-9. Search bar in the Newest blogs view, to search by title or content
-10. Blogs and comments are deletable by the owner, blogs can also be edited
+3. register view
+4. Categories list view, clickable category names to view posts from the chosen category
+5. Open blog post view, with comments and comment form for authenticated users
+6. Your blogs list
+7. Create blog view
+8. Edit blog view
+9. Profile edit view (provided by breeze, change password, name, email, delete account)
+10. Search bar in the Newest blogs view, to search by title or content
+11. Blogs and comments are deletable by the owner, blogs can also be edited
     1. blogs can be edited and deleted from the Your blogs view
     2. comments can be deleted in the open blog post view

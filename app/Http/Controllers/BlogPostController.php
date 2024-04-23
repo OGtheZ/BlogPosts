@@ -23,7 +23,9 @@ class BlogPostController extends Controller
         $blogPost->author_id = $user->id;
         $blogPost->save();
 
-        $blogPost->blogCategories()->attach($validated['categories']);
+        if(isset($validated['categories'])) {
+            $blogPost->blogCategories()->attach($validated['categories']);
+        }
 
         return redirect()->route('blog.own_list');
     }

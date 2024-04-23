@@ -15,7 +15,7 @@ class BlogCategoryController extends Controller
     public function viewBlogs(BlogCategory $category): View
     {
         $categories = BlogCategory::all();
-        $posts = $category->blogPosts()->get();
+        $posts = $category->blogPosts()->get()->sortByDesc('created_at');
 
         return view('categories/list', ['categories' => $categories, 'posts' => $posts]);
     }
