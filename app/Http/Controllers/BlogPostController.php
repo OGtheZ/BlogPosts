@@ -52,13 +52,17 @@ class BlogPostController extends Controller
     }
 
     public function updateView(BlogPost $post): View {
-        return view('blog/update_view', ['post' => $post]);
+        $categories = BlogCategory::all();
+        $setCategoryArray = $post->blogCategories()->pluck('id')->toArray();
+        return view('blog/update_view', ['post' => $post, 'categories' => $categories, 'setCategories' => $setCategoryArray]);
     }
 
     public function update(BlogPost $post, BlogPostUpdateRequest $request): RedirectResponse {
-        $validated = $request->safe()->only(['body', 'title']);
+        $validated = $request->safe()->only(['body', 'title', 'categories']);
         $post->title = strip_tags($validated['title']);
         $post->body = strip_tags($validated['body'],'<p><br>');
+        $post->blogCategories()->detach();
+        $post->blogCategories()->attach($validated['categories']);
         $post->save();
 
         return redirect()->route('blog.own_list');

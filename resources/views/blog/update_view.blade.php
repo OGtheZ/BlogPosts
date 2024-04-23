@@ -17,6 +17,20 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <x-form action="{{ route('blog.edit', ['post' => $post]) }}" method="post">
                     @csrf
+                    <div class="category-box ml-2 mt-2 mr-2">
+                        <x-input-label for="categories" :value="__('Category')"/>
+                        <div class="checkboxes grid grid-cols-4">
+                            @foreach($categories as $category)
+                                <div class="flex items-center mb-4">
+                                    <input id="checkbox{{$loop->index}}" type="checkbox"
+                                           @if( in_array($category->id, $setCategories)) checked @endif
+                                           value="{{ $category->id }}" name="categories[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="checkbox{{$loop->index}}" class="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500">{{ $category->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
                     <div class="mx-2 my-2 max-w-2xl">
                         <x-input-label for="title" :value="__('Title')" />
                         <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" value="{{ $post->title }}"/>

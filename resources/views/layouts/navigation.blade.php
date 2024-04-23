@@ -12,7 +12,7 @@
                     @endauth
                     <x-nav-link :href="route('blog.view_new')" :active="request()->routeIs(['blog.view_new'])">
                         {{ __('Newest blogs') }}
-                    </x-nav-link><x-nav-link :href="route('categories.list')" :active="request()->routeIs(['categories.list', 'categories.blogs'])">
+                    </x-nav-link><x-nav-link :href="route('categories.list')" :active="request()->routeIs('categories.list')">
                         {{ __('Categories') }}
                     </x-nav-link>
 

@@ -29,7 +29,9 @@ class BlogPostUpdateRequest extends FormRequest
         $post = $this->post;
         return [
             'title' => ['required', 'max:255', "unique:blog_posts,title,$post->id"],
-            'body' => ['required']
+            'body' => ['required'],
+            'categories' => ['array'],
+            'categories.*' => ['required', 'exists:blog_categories,id']
         ];
     }
 }

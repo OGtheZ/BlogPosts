@@ -29,7 +29,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [BlogPostController::class, 'viewNewest'])->name('blog.view_new');
 Route::get('/blog/{post}/view', [BlogPostController::class, 'view'])->name('blog.view');
 Route::get('/categories', [BlogCategoryController::class, 'view'])->name('categories.list');
-Route::get('/categories/{category}/blogs', [BlogCategoryController::class, 'viewBlogs'])->name('categories.blogs');
 
 Route::middleware('auth')->group(function () {
     Route::middleware(BlogPostOwnership::class)->group(function () {
