@@ -29,11 +29,9 @@ class BlogCommentController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @throws AuthorizationException
      */
     public function delete(BlogComment $blogComment): RedirectResponse
     {
-        $this->authorize('delete', $blogComment);
         $blogComment->delete();
         return redirect()->back();
     }

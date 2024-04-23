@@ -46,28 +46,16 @@ class BlogPostController extends Controller
         return view('blog/view', ['post' => $post]);
     }
 
-    /**
-     * @throws AuthorizationException
-     */
     public function delete(BlogPost $post): RedirectResponse {
-        $this->authorize('delete', $post);
         $post->delete();
         return redirect()->route('blog.own_list');
     }
 
-    /**
-     * @throws AuthorizationException
-     */
     public function updateView(BlogPost $post): View {
-        $this->authorize('updateView', $post);
         return view('blog/update_view', ['post' => $post]);
     }
 
-    /**
-     * @throws AuthorizationException
-     */
     public function update(BlogPost $post, BlogPostUpdateRequest $request): RedirectResponse {
-        $this->authorize('update', $post);
         $validated = $request->safe()->only(['body', 'title']);
         $post->title = strip_tags($validated['title']);
         $post->body = strip_tags($validated['body'],'<p><br>');
