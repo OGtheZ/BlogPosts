@@ -10,13 +10,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <x-form action="{{ route('blog.store') }}" method="post">
                     @csrf
-                    <div class="category-box ml-2 mt-2">
-                        <x-input-label for="categories" :value="__('Category')" />
-                        <select class="mt-2 rounded border-gray-300" name="categories[]" id="categories" multiple="multiple">
+                    <div class="category-box ml-2 mt-2 mr-2">
+                        <x-input-label for="categories" :value="__('Category')"/>
+                        <div class="checkboxes grid grid-cols-4">
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <div class="flex items-center mb-4">
+                                    <input id="checkbox{{$loop->index}}" type="checkbox" value="{{ $category->id }}" name="categories[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="checkbox{{$loop->index}}" class="ms-2 text-sm font-medium text-gray-400 dark:text-gray-500">{{ $category->name }}</label>
+                                </div>
                             @endforeach
-                        </select>
+                        </div>
+
                     </div>
                     <div class="mx-2 my-2 max-w-2xl">
                         <x-input-label for="title" :value="__('Title')" />
@@ -36,13 +40,3 @@
         </div>
     </div>
 </x-app-layout>
-@push('styles')
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/styles/choices.min.css"
-    />
-@endpush
-
-@push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/choices.js@9.0.1/public/assets/scripts/choices.min.js" defer></script>
-@endpush
