@@ -35,7 +35,7 @@ class BlogPostController extends Controller
 
     public function listOwn(): View {
         $user = auth()->user();
-        $posts = BlogPost::where('author_id', $user->id)->orderBy('created_at', 'desc')->get();
+        $posts = BlogPost::where('author_id', $user->id)->orderBy('created_at', 'desc')->paginate(10);
         return view('blog/list', ['posts' => $posts]);
     }
 
@@ -76,8 +76,8 @@ class BlogPostController extends Controller
 
     public function viewNewest(Request $request): View {
         $search = $request->get('search');
-        $search === null ? $posts = BlogPost::orderBy('created_at', 'DESC')->get() :
-            $posts = BlogPost::search($search)->orderBy('created_at', 'desc')->get();
+        $search === null ? $posts = BlogPost::orderBy('created_at', 'DESC')->paginate(10) :
+            $posts = BlogPost::search($search)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('blog/list', ['posts' => $posts]);
     }
