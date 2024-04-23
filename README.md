@@ -10,7 +10,7 @@
 3. Setup .env , database url
     1. the database type used in this project is Postgresql
     2. create a database and add the host, port, user, password and database name
-    3. set SCOUT_DRIVER to database to make models searchable the database
+    3. set SCOUT_DRIVER to database to make models searchable in the database
     4. setup mailer data to use password reset functionality. for tests you can use mailtrap.io e.g.
     5. email verification is not enabled in project by default
 4. run migrations with the command: php artisan migrate
