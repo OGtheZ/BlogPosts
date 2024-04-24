@@ -13,7 +13,7 @@ class BlogPostUpdateRequest extends FormRequest
      */
     public function authorize(User $user, BlogPost $post): bool
     {
-        if($user->id === $post->author_id) {
+        if ($user->id === $post->author_id) {
             return true;
         };
         return false;

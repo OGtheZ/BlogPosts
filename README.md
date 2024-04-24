@@ -18,8 +18,8 @@
     1. this will create:
        1. 5 users, test1@example.com (pw=password) e.g.
        2. 5 blog categories
-       3. 15 blog posts, 3 for each category
-       4. 75 blog comments, by each user for every blog
+       3. 125 blog posts, 25 for each category
+       4. 625 blog comments, by each user for every blog
 6. to locally test application - in the terminal, in the project root directory, run: php artisan serve, to launch local server
 
 ### Features
