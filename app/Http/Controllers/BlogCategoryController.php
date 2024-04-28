@@ -3,15 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogCategory;
-use App\Repositories\BlogPostRepository;
 use Illuminate\View\View;
 
 class BlogCategoryController extends Controller
 {
-    public function __construct(private BlogPostRepository $postRepository)
-    {
-    }
-
     public function index(): View
     {
         $categories = BlogCategory::where('active', true)->orderBy('created_at', 'desc')->paginate(10);
