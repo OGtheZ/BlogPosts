@@ -21,6 +21,7 @@ class BlogPostController extends Controller
     public function create(): View
     {
         $categories = BlogCategory::where('active', true)->get();
+
         return view('blog/create_view', ['categories' => $categories]);
     }
 
@@ -37,6 +38,7 @@ class BlogPostController extends Controller
         $post->load(['comments' => function ($query) {
             $query->orderBy('created_at', 'desc')->limit(5);
         }]);
+
         return view('blog/view', ['post' => $post]);
     }
 
