@@ -21,7 +21,7 @@ class BlogCategoryController extends Controller
 
     public function show(BlogCategory $blogCategory): View
     {
-        $posts = $this->postRepository->getByCategoryIdOrderedAndPaginated($blogCategory->id);
+        $posts = $blogCategory->blogPosts()->orderBy('created_at', 'desc')->paginate(10);
 
         return view('categories/show', ['category' => $blogCategory, 'posts' => $posts]);
     }
