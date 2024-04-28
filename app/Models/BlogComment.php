@@ -10,6 +10,8 @@ class BlogComment extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function author(): BelongsTo
     {
         return $this->belongsTo('App\Models\User', 'author_id');

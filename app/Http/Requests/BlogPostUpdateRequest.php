@@ -15,7 +15,7 @@ class BlogPostUpdateRequest extends FormRequest
     {
         if ($user->id === $post->author_id) {
             return true;
-        };
+        }
         return false;
     }
 

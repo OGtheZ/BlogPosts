@@ -3,25 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogCategory;
-use App\Models\BlogPost;
-use Illuminate\Http\Request;
+use App\Repositories\BlogPostRepository;
 use Illuminate\View\View;
 
 class BlogCategoryController extends Controller
 {
-    public function view(Request $request): View
+    public function __construct(private BlogPostRepository $postRepository)
     {
-        $categories = BlogCategory::all();
-        $selected = $request->get('category');
-        $category = BlogCategory::find($selected);
+    }
 
-        if ($category === null) {
-            return view('categories/list', ['categories' => $categories]);
-        }
-        $posts = BlogPost::whereHas('blogCategories', function ($query) use ($category) {
-            $query->where('id', $category->id);
-        })->orderBy('created_at', 'desc')->paginate(10)->appends(request()->query());
-        return view('categories/list', ['categories' => $categories, 'posts' => $posts]);
+    public function index(): View
+    {
+        $categories = BlogCategory::where('active', true)->orderBy('created_at', 'desc')->paginate(10);
 
+        return view('categories/list', ['categories' => $categories]);
+    }
+
+    public function show(BlogCategory $blogCategory): View
+    {
+        $posts = $this->postRepository->getByCategoryIdOrderedAndPaginated($blogCategory->id);
+
+        return view('categories/show', ['category' => $blogCategory, 'posts' => $posts]);
     }
 }

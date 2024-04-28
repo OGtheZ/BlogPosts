@@ -3,36 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogCommentRequest;
-use App\Http\Requests\UpdateBlogCommentRequest;
 use App\Models\BlogComment;
 use App\Models\BlogPost;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class BlogCommentController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreBlogCommentRequest $request, BlogPost $post): RedirectResponse
     {
-        $user = auth()->user();
-        $body = strip_tags($request->validated('body'));
+        $post->comments()->create([...$request->validated(), 'author_id' => $request->user()->id]);
 
-        $comment = new BlogComment();
-        $comment->author_id = $user->id;
-        $comment->blog_post_id = $post->id;
-        $comment->body = $body;
-        $comment->save();
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function delete(BlogComment $blogComment): RedirectResponse
+    public function destroy(BlogComment $blogComment): RedirectResponse
     {
         $blogComment->delete();
+
         return redirect()->back();
+    }
+
+    public function index(BlogPost $post): View
+    {
+        $comments = $post->comments()->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('blog/comments', ['post' => $post, 'comments' => $comments]);
     }
 }

@@ -24,9 +24,10 @@
             </div>
             <div class="comment-section flex">
                 <div class="w-1/2 mr-auto p-6">
-                    <div class="mt-6">
-                        <h2>Comments</h2>
-                            @foreach( $post->comments->sortByDesc('created_at') as $comment )
+                    <div class="mt- mb-6">
+                        <h2 class="font-semibold text-4xl mb-2">Comments:</h2>
+                        @if(count($post->comments) > 0)
+                            @foreach( $post->comments as $comment )
                             <div class=" mt-2 scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex focus:outline focus:outline-2 focus:outline-red-500">
                                 <div class="comment-box">
                                     @can('delete', $comment)
@@ -41,7 +42,13 @@
                                 </div>
                             </div>
                             @endforeach
+                        @else
+                            <span>No comments yet!</span>
+                        @endif
                     </div>
+                    @if(count($post->comments) > 0)
+                    <a class="border border-gray-400 px-2 py-2 rounded hover:bg-gray-300" href="{{ route('comments.list', ['post' => $post]) }}">View all comments</a>
+                    @endif
                 </div>
                 @auth
                 <div class="w-1/2 ml-auto p-6">
